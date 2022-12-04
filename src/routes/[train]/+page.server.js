@@ -1,13 +1,13 @@
 import { error } from '@sveltejs/kit';
 
 export const load = async ({ params }) => {
-	console.log(params);
 	const locationsResponse = await fetch('https://trafikverket-locations.netlify.app/short.json');
 	if (!locationsResponse.ok) throw error(locationsResponse.status, locationsResponse.statusText);
 
+	const until = new Date(new Date().getTime() + 12 * 60 * 60 * 1000);
 	const announcementsResponse = await fetch('https://api.trafikinfo.trafikverket.se/v2/data.json', {
 		method: 'POST',
-		body: getBody({ train: '282', until: '2022-12-04T19:00:00.000+01:00' }),
+		body: getBody({ train: params.train, until: until.toISOString() }),
 		headers: {
 			'Content-Type': 'application/xml',
 			Accept: 'application/json'
@@ -38,7 +38,7 @@ function getBody({ train, until }) {
 	return `
 <REQUEST>
   <LOGIN authenticationkey='${process.env.TRAFIKVERKET_API_KEY}' />
-    <QUERY sseurl='true' objecttype='TrainAnnouncement' orderby='TimeAtLocationWithSeconds' schemaversion='1.6'>
+    <QUERY sseurl='false' objecttype='TrainAnnouncement' orderby='TimeAtLocationWithSeconds' schemaversion='1.6'>
       <FILTER>
         <AND>
           <EQ name='AdvertisedTrainIdent' value='${train}'/>

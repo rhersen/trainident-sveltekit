@@ -2,7 +2,6 @@
 	export let data;
 </script>
 
-<h1>Welcome to 282</h1>
 <table>
 	<tr>
 		<th>activity</th>

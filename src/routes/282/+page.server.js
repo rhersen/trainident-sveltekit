@@ -7,7 +7,7 @@ export const load = async ({ params }) => {
 
 	const announcementsResponse = await fetch('https://api.trafikinfo.trafikverket.se/v2/data.json', {
 		method: 'POST',
-		body: getBody({ train: '282', until: '2022-12-04T17:51:00.000+01:00' }),
+		body: getBody({ train: '282', until: '2022-12-04T19:00:00.000+01:00' }),
 		headers: {
 			'Content-Type': 'application/xml',
 			Accept: 'application/json'
@@ -17,8 +17,17 @@ export const load = async ({ params }) => {
 		throw error(announcementsResponse.status, announcementsResponse.statusText);
 
 	const { RESPONSE } = await announcementsResponse.json();
-	const [announcements] = RESPONSE.RESULT;
+	const [result] = RESPONSE.RESULT;
 
+	const announcements = result.TrainAnnouncement.filter(
+		({ TimeAtLocationWithSeconds }) => TimeAtLocationWithSeconds
+	);
+	announcements.sort((a1, a2) => {
+		const t1 = a1.TimeAtLocationWithSeconds.slice(11);
+		const t2 = a2.TimeAtLocationWithSeconds.slice(11);
+		if (t1 === t2) return 0;
+		return t1 < t2 ? -1 : 1;
+	});
 	return {
 		locations: await locationsResponse.json(),
 		announcements
@@ -41,9 +50,7 @@ function getBody({ train, until }) {
       <INCLUDE>AdvertisedTimeAtLocation</INCLUDE>
       <INCLUDE>LocationSignature</INCLUDE>
       <INCLUDE>TrackAtLocation</INCLUDE>
-      <INCLUDE>TimeAtLocation</INCLUDE>
       <INCLUDE>TimeAtLocationWithSeconds</INCLUDE>
-      <INCLUDE>ToLocation</INCLUDE>
-     </QUERY>
+    </QUERY>
 </REQUEST>`;
 }

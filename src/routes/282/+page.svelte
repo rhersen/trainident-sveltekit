@@ -3,4 +3,4 @@
 </script>
 
 <h1>Welcome to 282</h1>
-<p>{JSON.stringify(data.locations)}</p>
+<p>{JSON.stringify(data.announcements)}</p>

@@ -2,5 +2,5 @@
 	export let data;
 </script>
 
-<h1>Welcome to 282</h1>
+<h1>Welcome to {data.location}</h1>
 <p>{JSON.stringify(data.announcements)}</p>

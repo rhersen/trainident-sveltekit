@@ -2,10 +2,11 @@ import { error } from '@sveltejs/kit';
 
 export const load = async ({ params }) => {
 	console.log(params);
+	const { location } = params;
 
 	const announcementsResponse = await fetch('https://api.trafikinfo.trafikverket.se/v2/data.json', {
 		method: 'POST',
-		body: getBody({ location: 'Tul' }),
+		body: getBody({ location }),
 		headers: {
 			'Content-Type': 'application/xml',
 			Accept: 'application/json'
@@ -17,9 +18,7 @@ export const load = async ({ params }) => {
 	const { RESPONSE } = await announcementsResponse.json();
 	const [announcements] = RESPONSE.RESULT;
 
-	return {
-		announcements
-	};
+	return { location, announcements };
 };
 
 function getBody({ location }) {

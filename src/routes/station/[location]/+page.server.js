@@ -18,7 +18,7 @@ export const load = async ({ params }) => {
 	const { RESPONSE } = await announcementsResponse.json();
 	const [announcements] = RESPONSE.RESULT;
 
-	return { location, announcements };
+	return { location, announcements: announcements.TrainAnnouncement };
 };
 
 function getBody({ location }) {
@@ -33,10 +33,10 @@ function getBody({ location }) {
             <EQ name='ActivityType' value='Avgang' />
             <EQ name='LocationSignature' value='${location}' />
             <OR>
-               <GT name='AdvertisedTimeAtLocation' value='$dateadd(-0:05:00)' />
-               <GT name='EstimatedTimeAtLocation' value='$dateadd(-0:05:00)' />
+               <GT name='AdvertisedTimeAtLocation' value='$dateadd(-1:05:00)' />
+               <GT name='EstimatedTimeAtLocation' value='$dateadd(-1:05:00)' />
             </OR>
-            <LT name='AdvertisedTimeAtLocation' value='$dateadd(0:30:00)' />
+            <LT name='AdvertisedTimeAtLocation' value='$dateadd(1:30:00)' />
          </AND>
       </FILTER>
      </QUERY>

@@ -1,6 +1,16 @@
 <script>
+	import StationRow from './StationRow.svelte';
+
 	export let data;
 </script>
 
-<h1>Welcome to {data.location}</h1>
-<p>{JSON.stringify(data.announcements)}</p>
+<table>
+	<caption>
+		{data.location}
+	</caption>
+	<tbody>
+		{#each data.announcements as announcement}
+			<StationRow {announcement} />
+		{/each}
+	</tbody>
+</table>

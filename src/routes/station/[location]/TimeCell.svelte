@@ -9,7 +9,7 @@
 	}
 </script>
 
-<td class="time">
+<td>
 	{#if announcement.TimeAtLocation}
 		<b>{hmm(announcement.TimeAtLocationWithSeconds)}</b>
 	{:else if announcement.EstimatedTimeAtLocation}
@@ -18,3 +18,13 @@
 		{hmm(announcement.AdvertisedTimeAtLocation)}
 	{/if}
 </td>
+
+<style>
+	td {
+		border: 1px solid gray;
+		font-size: 22px;
+		font-family: Palatino, serif;
+		text-align: right;
+		padding: 0 2px;
+	}
+</style>

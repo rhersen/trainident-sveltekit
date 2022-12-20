@@ -20,4 +20,14 @@
 	}
 </script>
 
-<td class="short">{shortText(announcement)}</td>
+<td>{shortText(announcement)}</td>
+
+<style>
+	td {
+		border: 1px solid gray;
+		font-size: 22px;
+		font-family: Palatino, serif;
+		text-align: left;
+		padding: 0 2px;
+	}
+</style>

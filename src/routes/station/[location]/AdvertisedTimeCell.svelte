@@ -13,4 +13,20 @@
 	}
 </script>
 
-<td class="advertised">{time(announcement)}</td>
+<td>{time(announcement)}</td>
+
+<style>
+	td {
+		border: 1px solid gray;
+		font-size: 22px;
+		font-family: Palatino, serif;
+		text-align: right;
+		padding: 0 2px;
+	}
+
+	@media (max-width: 580px) {
+		td {
+			display: none;
+		}
+	}
+</style>

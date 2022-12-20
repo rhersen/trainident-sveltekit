@@ -14,3 +14,16 @@
 		{/each}
 	</tbody>
 </table>
+
+<style>
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	caption {
+		font-size: 1.5em;
+		font-weight: bold;
+		margin-top: 0.83em;
+	}
+</style>

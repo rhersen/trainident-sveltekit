@@ -1,11 +1,11 @@
 import { error } from '@sveltejs/kit';
 
 export const load = async ({ params }) => {
-	const { location } = params;
+	const { id } = params;
 
 	const announcementsResponse = await fetch('https://api.trafikinfo.trafikverket.se/v2/data.json', {
 		method: 'POST',
-		body: getBody({ location }),
+		body: getBody({ id }),
 		headers: {
 			'Content-Type': 'application/xml',
 			Accept: 'application/json'
@@ -17,10 +17,10 @@ export const load = async ({ params }) => {
 	const { RESPONSE } = await announcementsResponse.json();
 	const [announcements] = RESPONSE.RESULT;
 
-	return { location, announcements: announcements.TrainAnnouncement };
+	return { id, announcements: announcements.TrainAnnouncement };
 };
 
-function getBody({ location }) {
+function getBody({ id }) {
 	return `
 <REQUEST>
   <LOGIN authenticationkey='${process.env.TRAFIKVERKET_API_KEY}' />
@@ -30,7 +30,7 @@ function getBody({ location }) {
             <NE name='Canceled' value='true' />
             <EQ name='Advertised' value='true' />
             <EQ name='ActivityType' value='Avgang' />
-            <EQ name='LocationSignature' value='${location}' />
+        <EQ name='AdvertisedTrainIdent' value='${id}' />
             <OR>
                <GT name='AdvertisedTimeAtLocation' value='$dateadd(-1:05:00)' />
                <GT name='EstimatedTimeAtLocation' value='$dateadd(-1:05:00)' />

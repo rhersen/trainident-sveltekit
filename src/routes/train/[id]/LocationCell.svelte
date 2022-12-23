@@ -1,10 +1,12 @@
 <script>
+	import locations from '$lib/short.json';
+
 	export let announcement;
 </script>
 
 <td>
-	<a href="/train/{announcement.AdvertisedTrainIdent}">
-		{announcement.AdvertisedTrainIdent}
+	<a href="/station/{announcement.LocationSignature}">
+		{locations[announcement.LocationSignature]}
 	</a>
 </td>
 
@@ -15,11 +17,9 @@
 		font-family: Palatino, serif;
 		text-align: left;
 		padding: 0 2px;
-		color: blue;
-		text-decoration: underline;
 	}
 
-	@media (max-width: 520px) {
+	@media (max-width: 370px) {
 		td {
 			display: none;
 		}

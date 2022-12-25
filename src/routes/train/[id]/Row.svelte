@@ -6,6 +6,7 @@
 	import DelayCell from '$lib/components/DelayCell.svelte';
 	import DeviationCell from '$lib/components/DeviationCell.svelte';
 	import LocationCell from './LocationCell.svelte';
+	import CountdownCell from '$lib/components/CountdownCell.svelte';
 
 	export let announcement;
 </script>
@@ -17,15 +18,6 @@
 	<AdvertisedTimeCell {announcement} />
 	<TimeCell {announcement} />
 	<DelayCell {announcement} />
+	<CountdownCell {announcement} />
 	<DeviationCell {announcement} />
 </tr>
-
-<style>
-	tr.northbound {
-		background-color: #fdd;
-	}
-
-	tr.southbound {
-		background-color: lightblue;
-	}
-</style>

@@ -1,5 +1,5 @@
 <script>
-	import StationRow from './StationRow.svelte';
+	import Row from './Row.svelte';
 
 	export let data;
 </script>
@@ -10,7 +10,7 @@
 	</caption>
 	<tbody>
 		{#each data.announcements as announcement}
-			<StationRow {announcement} />
+			<Row {announcement} />
 		{/each}
 	</tbody>
 </table>

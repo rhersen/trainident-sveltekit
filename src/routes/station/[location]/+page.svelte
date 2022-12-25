@@ -1,6 +1,6 @@
 <script>
 	import locations from '$lib/short.json';
-	import TrainRow from './TrainRow.svelte';
+	import Row from './Row.svelte';
 
 	export let data;
 </script>
@@ -11,7 +11,7 @@
 	</caption>
 	<tbody>
 		{#each data.announcements as announcement}
-			<TrainRow {announcement} />
+			<Row {announcement} />
 		{/each}
 	</tbody>
 </table>

@@ -1,25 +1,29 @@
 <script>
 	import { addSeconds, differenceInSeconds, format, parseISO } from 'date-fns';
+	import { onDestroy } from 'svelte';
 
 	export let announcement;
 
-	function countdown(announcement, now) {
-		if (!now) return '';
-
+	function getCountdown() {
 		const dateLeft =
 			announcement.TimeAtLocationWithSeconds ||
 			announcement.EstimatedTimeAtLocation ||
 			announcement.AdvertisedTimeAtLocation;
-		const seconds = differenceInSeconds(parseISO(dateLeft), now);
+		const seconds = differenceInSeconds(parseISO(dateLeft), new Date());
 
 		if (seconds <= -100) return '';
 		if (seconds >= 600) return `${format(addSeconds(new Date(0), seconds), 'm')}min`;
 		if (seconds >= 100) return format(addSeconds(new Date(0), seconds), 'm:ss');
 		return `${seconds}s`;
 	}
+
+	let countdown = getCountdown();
+
+	const interval = setInterval(() => (countdown = getCountdown()), 1000);
+	onDestroy(() => clearInterval(interval));
 </script>
 
-<td>{countdown(announcement, new Date())}</td>
+<td>{countdown}</td>
 
 <style>
 	td {

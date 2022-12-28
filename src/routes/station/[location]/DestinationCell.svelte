@@ -8,8 +8,8 @@
 </script>
 
 <td>
-	<span class="from">{loc(announcement.FromLocation)}–</span><span
-		>{loc(announcement.ToLocation)}</span
+	<span class="from">{loc(announcement.FromLocation)}–</span><a
+		href="/train/{announcement.AdvertisedTrainIdent}">{loc(announcement.ToLocation)}</a
 	>
 </td>
 
@@ -26,10 +26,10 @@
 		font-size: smaller;
 	}
 
-	@media (max-width: 520px) {
-		td {
-			color: blue;
-			text-decoration: underline;
+	@media (min-width: 520px) {
+		a {
+			color: black;
+			text-decoration: none;
 		}
 	}
 

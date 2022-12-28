@@ -17,7 +17,36 @@ export const load = async ({ params }) => {
 	const { RESPONSE } = await announcementsResponse.json();
 	const [announcements] = RESPONSE.RESULT;
 
-	return { id, announcements: announcements.TrainAnnouncement };
+	const [
+		{
+			AdvertisedTrainIdent,
+			FromLocation,
+			Operator,
+			ProductInformation,
+			ToLocation,
+			TrainOwner,
+			ViaToLocation
+		}
+	] = announcements.TrainAnnouncement;
+	console.log({
+		AdvertisedTrainIdent,
+		FromLocation,
+		Operator,
+		ProductInformation,
+		ToLocation,
+		TrainOwner,
+		ViaToLocation
+	});
+	return {
+		AdvertisedTrainIdent,
+		FromLocation,
+		Operator,
+		ProductInformation,
+		ToLocation,
+		TrainOwner,
+		ViaToLocation,
+		announcements: announcements.TrainAnnouncement
+	};
 };
 
 function getBody({ id }) {

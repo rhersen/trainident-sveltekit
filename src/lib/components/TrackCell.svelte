@@ -2,7 +2,7 @@
 	export let announcement;
 </script>
 
-<td>{announcement.TrackAtLocation}</td>
+<td>{announcement.TrackAtLocation ?? ''}</td>
 
 <style>
 	td {

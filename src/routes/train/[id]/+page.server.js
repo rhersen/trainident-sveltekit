@@ -57,14 +57,13 @@ function getBody({ id }) {
       <FILTER>
          <AND>
             <NE name='Canceled' value='true' />
-            <EQ name='Advertised' value='true' />
             <EQ name='ActivityType' value='Avgang' />
         <EQ name='AdvertisedTrainIdent' value='${id}' />
             <OR>
-               <GT name='AdvertisedTimeAtLocation' value='$dateadd(-1:05:00)' />
-               <GT name='EstimatedTimeAtLocation' value='$dateadd(-1:05:00)' />
+               <GT name='AdvertisedTimeAtLocation' value='$dateadd(-12:00:00)' />
+               <GT name='EstimatedTimeAtLocation' value='$dateadd(-12:00:00)' />
             </OR>
-            <LT name='AdvertisedTimeAtLocation' value='$dateadd(1:30:00)' />
+            <LT name='AdvertisedTimeAtLocation' value='$dateadd(12:00:00)' />
          </AND>
       </FILTER>
      </QUERY>

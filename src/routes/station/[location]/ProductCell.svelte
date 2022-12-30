@@ -15,7 +15,7 @@
 		padding: 0 2px;
 	}
 
-	@media (max-width: 800px) {
+	@media (max-width: 711px) {
 		td {
 			display: none;
 		}

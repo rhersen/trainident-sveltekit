@@ -8,6 +8,7 @@
 	import DelayCell from '$lib/components/DelayCell.svelte';
 	import DeviationCell from '$lib/components/DeviationCell.svelte';
 	import CountdownCell from '$lib/components/CountdownCell.svelte';
+	import ProductCell from './ProductCell.svelte';
 
 	export let announcement;
 
@@ -17,6 +18,7 @@
 </script>
 
 <tr class={directionClass(announcement)}>
+	<ProductCell {announcement} />
 	<TrainIdCell {announcement} />
 	<TrackCell {announcement} />
 	<ShortCell {announcement} />
@@ -28,6 +30,7 @@
 	<DeviationCell {announcement} />
 </tr>
 
+<!--suppress CssUnusedSymbol -->
 <style>
 	tr.northbound {
 		background-color: #fdd;

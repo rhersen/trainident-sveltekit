@@ -7,14 +7,18 @@
 
 <table>
 	<caption>
-		{data.ProductInformation.map(({ Description }) => Description).join(' ')}
-		{data.AdvertisedTrainIdent}
-		från
-		{data.FromLocation.map(({ LocationName }) => locations[LocationName]).join(' ')}
-		till
-		{data.ToLocation.map(({ LocationName }) => locations[LocationName]).join(' ')}
-		via
-		{data.ViaToLocation?.map(({ LocationName }) => locations[LocationName]).join(', ')}
+		<div>
+			{data.ProductInformation?.map(({ Description }) => Description).join(' ')}
+			{data.AdvertisedTrainIdent}
+			från
+			{data.FromLocation?.map(({ LocationName }) => locations[LocationName]).join(' ')}
+			till
+			{data.ToLocation?.map(({ LocationName }) => locations[LocationName]).join(' ')}
+		</div>
+		<div>
+			via
+			{data.ViaToLocation?.map(({ LocationName }) => locations[LocationName]).join(', ')}
+		</div>
 	</caption>
 	<tbody>
 		{#each data.announcements as announcement}
@@ -30,8 +34,16 @@
 	}
 
 	caption {
-		font-size: 1.5em;
+		font-family: Palatino, serif;
 		font-weight: bold;
 		margin-top: 0.83em;
+	}
+
+	caption div:nth-child(1) {
+		font-size: 1.5em;
+	}
+
+	caption div:nth-child(2) {
+		font-size: 1.2em;
 	}
 </style>

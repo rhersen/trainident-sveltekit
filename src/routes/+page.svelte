@@ -1,3 +1,6 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="station/Tul">Tul</a> to read the documentation</p>
-<p>Visit <a href="station/Upv">Upv</a> to read the documentation</p>
+<h1>Välj station</h1>
+<a href="station/Tul">Tullinge</a>
+<a href="station/Mr">Märsta</a>
+<a href="station/Sub">Sundbyberg</a>
+<a href="station/So">Solna</a>
+<a href="station/Sci">City</a>

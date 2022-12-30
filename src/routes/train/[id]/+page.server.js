@@ -1,4 +1,5 @@
 import { error } from '@sveltejs/kit';
+import announcements from '$lib/announcements.js';
 
 export const load = async ({ params }) => {
 	const { id } = params;
@@ -15,7 +16,6 @@ export const load = async ({ params }) => {
 		throw error(announcementsResponse.status, announcementsResponse.statusText);
 
 	const { RESPONSE } = await announcementsResponse.json();
-	const [announcements] = RESPONSE.RESULT;
 
 	const [
 		{
@@ -27,7 +27,7 @@ export const load = async ({ params }) => {
 			TrainOwner,
 			ViaToLocation
 		}
-	] = announcements.TrainAnnouncement;
+	] = RESPONSE.RESULT[0].TrainAnnouncement;
 	console.log({
 		AdvertisedTrainIdent,
 		FromLocation,
@@ -45,7 +45,7 @@ export const load = async ({ params }) => {
 		ToLocation,
 		TrainOwner,
 		ViaToLocation,
-		announcements: announcements.TrainAnnouncement
+		announcements: announcements(RESPONSE)
 	};
 };
 
@@ -57,8 +57,7 @@ function getBody({ id }) {
       <FILTER>
          <AND>
             <NE name='Canceled' value='true' />
-            <EQ name='ActivityType' value='Avgang' />
-        <EQ name='AdvertisedTrainIdent' value='${id}' />
+        		<EQ name='AdvertisedTrainIdent' value='${id}' />
             <OR>
                <GT name='AdvertisedTimeAtLocation' value='$dateadd(-12:00:00)' />
                <GT name='EstimatedTimeAtLocation' value='$dateadd(-12:00:00)' />

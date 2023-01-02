@@ -28,15 +28,7 @@ export const load = async ({ params }) => {
 			ViaToLocation
 		}
 	] = RESPONSE.RESULT[0].TrainAnnouncement;
-	console.log({
-		AdvertisedTrainIdent,
-		FromLocation,
-		Operator,
-		ProductInformation,
-		ToLocation,
-		TrainOwner,
-		ViaToLocation
-	});
+
 	return {
 		AdvertisedTrainIdent,
 		FromLocation,

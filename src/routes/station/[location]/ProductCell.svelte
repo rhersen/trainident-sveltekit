@@ -1,9 +1,11 @@
 <script>
+	import productDescription from '$lib/productDescription.js';
+
 	export let announcement;
 </script>
 
 <td>
-	{announcement.ProductInformation?.map(({ Description }) => Description).join(' ')}
+	{productDescription(announcement.ProductInformation)}
 </td>
 
 <style>

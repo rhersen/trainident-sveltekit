@@ -38,6 +38,16 @@ function getBody({ location }) {
             <LT name='AdvertisedTimeAtLocation' value='$dateadd(1:30:00)' />
          </AND>
       </FILTER>
+      <INCLUDE>AdvertisedTimeAtLocation</INCLUDE>
+      <INCLUDE>AdvertisedTrainIdent</INCLUDE>
+      <INCLUDE>Deviation</INCLUDE>
+      <INCLUDE>EstimatedTimeAtLocation</INCLUDE>
+      <INCLUDE>FromLocation</INCLUDE>
+      <INCLUDE>ProductInformation</INCLUDE>
+      <INCLUDE>TimeAtLocation</INCLUDE>
+      <INCLUDE>TimeAtLocationWithSeconds</INCLUDE>
+      <INCLUDE>ToLocation</INCLUDE>
+      <INCLUDE>TrackAtLocation</INCLUDE>
      </QUERY>
 </REQUEST>`;
 }

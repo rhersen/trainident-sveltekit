@@ -16,26 +16,14 @@ export const load = async ({ params }) => {
 		throw error(announcementsResponse.status, announcementsResponse.statusText);
 
 	const { RESPONSE } = await announcementsResponse.json();
-
-	const [
-		{
-			AdvertisedTrainIdent,
-			FromLocation,
-			Operator,
-			ProductInformation,
-			ToLocation,
-			TrainOwner,
-			ViaToLocation
-		}
-	] = RESPONSE.RESULT[0].TrainAnnouncement;
+	const { AdvertisedTrainIdent, FromLocation, ProductInformation, ToLocation, ViaToLocation } =
+		RESPONSE.RESULT[0].TrainAnnouncement.find((announcement) => announcement.ToLocation);
 
 	return {
 		AdvertisedTrainIdent,
 		FromLocation,
-		Operator,
 		ProductInformation,
 		ToLocation,
-		TrainOwner,
 		ViaToLocation,
 		announcements: announcements(RESPONSE)
 	};

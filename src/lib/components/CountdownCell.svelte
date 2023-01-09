@@ -12,7 +12,7 @@
 		const seconds = differenceInSeconds(parseISO(dateLeft), new Date());
 
 		if (seconds <= -100) return '';
-		if (seconds >= 600) return `${format(addSeconds(new Date(0), seconds), 'm')}min`;
+		if (seconds >= 600) return `${Math.floor(seconds / 60)}min`;
 		if (seconds >= 100) return format(addSeconds(new Date(0), seconds), 'm:ss');
 		return `${seconds}s`;
 	}

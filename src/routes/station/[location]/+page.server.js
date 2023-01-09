@@ -3,7 +3,7 @@ import { error } from '@sveltejs/kit';
 export const load = async ({ params }) => {
 	const { location } = params;
 
-	const announcementsResponse = await fetch('https://api.trafikinfo.trafikverket.se/v2/data.json', {
+	const r = await fetch('https://api.trafikinfo.trafikverket.se/v2/data.json', {
 		method: 'POST',
 		body: getBody({ location }),
 		headers: {
@@ -11,10 +11,9 @@ export const load = async ({ params }) => {
 			Accept: 'application/json'
 		}
 	});
-	if (!announcementsResponse.ok)
-		throw error(announcementsResponse.status, announcementsResponse.statusText);
+	if (!r.ok) throw error(r.status, r.statusText);
 
-	const { RESPONSE } = await announcementsResponse.json();
+	const { RESPONSE } = await r.json();
 	const [announcements] = RESPONSE.RESULT;
 
 	return { location, announcements: announcements.TrainAnnouncement };

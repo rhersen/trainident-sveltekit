@@ -15,10 +15,12 @@
 			till
 			{data.ToLocation?.map(({ LocationName }) => locations[LocationName]).join(' ')}
 		</div>
-		<div>
-			via
-			{data.ViaToLocation?.map(({ LocationName }) => locations[LocationName]).join(', ')}
-		</div>
+		{#if data.ViaToLocation}
+			<div>
+				via
+				{data.ViaToLocation?.map(({ LocationName }) => locations[LocationName]).join(', ')}
+			</div>
+		{/if}
 	</caption>
 	<tbody>
 		{#each data.announcements as announcement}

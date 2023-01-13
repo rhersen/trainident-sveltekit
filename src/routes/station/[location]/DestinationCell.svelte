@@ -33,7 +33,7 @@
 		}
 	}
 
-	@media (max-width: 900px) {
+	@media (max-width: 800px) {
 		.from {
 			display: none;
 		}

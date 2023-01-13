@@ -16,15 +16,14 @@ export const load = async ({ params }) => {
 		throw error(announcementsResponse.status, announcementsResponse.statusText);
 
 	const { RESPONSE } = await announcementsResponse.json();
-	const { AdvertisedTrainIdent, FromLocation, ProductInformation, ToLocation, ViaToLocation } =
-		RESPONSE.RESULT[0].TrainAnnouncement.find((announcement) => announcement.ToLocation);
+	const found = RESPONSE.RESULT[0].TrainAnnouncement.find(({ ToLocation }) => ToLocation);
 
 	return {
-		AdvertisedTrainIdent,
-		FromLocation,
-		ProductInformation,
-		ToLocation,
-		ViaToLocation,
+		AdvertisedTrainIdent: found?.AdvertisedTrainIdent,
+		FromLocation: found?.FromLocation,
+		ProductInformation: found?.ProductInformation,
+		ToLocation: found?.ToLocation,
+		ViaToLocation: found?.ViaToLocation,
 		announcements: announcements(RESPONSE)
 	};
 };

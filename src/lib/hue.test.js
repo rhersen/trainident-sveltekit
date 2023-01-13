@@ -22,4 +22,9 @@ describe('hue', () => {
 		expect(hue(480)).toBe(-30);
 		expect(hue(645)).toBe(-30);
 	});
+
+	it('does not go too far past green', () => {
+		expect(hue(-120)).toBe(180);
+		expect(hue(-300)).toBe(180);
+	});
 });

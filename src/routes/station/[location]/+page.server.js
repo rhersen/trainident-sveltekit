@@ -16,14 +16,21 @@ export const load = async ({ params }) => {
 	const { RESPONSE } = await r.json();
 	const [announcements] = RESPONSE.RESULT;
 
-	return { location, announcements: announcements.TrainAnnouncement };
+	return {
+		location,
+		announcements: announcements.TrainAnnouncement,
+		sseUrl: announcements.INFO.SSEURL
+	};
 };
 
 function getBody({ location }) {
+	const now = Date.now();
+	const since = new Date(now - 30 * 6e4).toISOString();
+	const until = new Date(now + 90 * 6e4).toISOString();
 	return `
 <REQUEST>
   <LOGIN authenticationkey='${process.env.TRAFIKVERKET_API_KEY}' />
-     <QUERY objecttype='TrainAnnouncement' orderby='AdvertisedTimeAtLocation' schemaversion='1.6'>
+     <QUERY objecttype='TrainAnnouncement' orderby='AdvertisedTimeAtLocation' sseurl='true' schemaversion='1.6'>
       <FILTER>
          <AND>
             <NE name='Canceled' value='true' />
@@ -31,10 +38,10 @@ function getBody({ location }) {
             <EQ name='ActivityType' value='Avgang' />
             <EQ name='LocationSignature' value='${location}' />
             <OR>
-               <GT name='AdvertisedTimeAtLocation' value='$dateadd(-1:05:00)' />
-               <GT name='EstimatedTimeAtLocation' value='$dateadd(-1:05:00)' />
+               <GT name='AdvertisedTimeAtLocation' value='${since}' />
+               <GT name='EstimatedTimeAtLocation' value='${since}' />
             </OR>
-            <LT name='AdvertisedTimeAtLocation' value='$dateadd(1:30:00)' />
+            <LT name='AdvertisedTimeAtLocation' value='${until}' />
          </AND>
       </FILTER>
       <INCLUDE>AdvertisedTimeAtLocation</INCLUDE>

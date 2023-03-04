@@ -6,7 +6,7 @@
 <a href="station/Sci">City</a>
 <a href="station/Sst">Södra</a>
 <a href="station/Åbe">Årstaberg</a>
-<a href="station/Sta">Älvsjö</a>
+<a href="station/Äs">Älvsjö</a>
 <a href="station/Hu">Huddinge</a>
 <a href="station/Flb">Flemingsberg</a>
 <a href="station/Tul">Tullinge</a>

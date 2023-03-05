@@ -26,7 +26,7 @@ export const load = async ({ params }) => {
 function getBody({ location }) {
 	const now = Date.now();
 	const since = new Date(now - 30 * 6e4).toISOString();
-	const until = new Date(now + 90 * 6e4).toISOString();
+	const until = new Date(now + 150 * 6e4).toISOString();
 	return `
 <REQUEST>
   <LOGIN authenticationkey='${process.env.TRAFIKVERKET_API_KEY}' />

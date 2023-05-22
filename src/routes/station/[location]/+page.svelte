@@ -6,20 +6,29 @@
 	export let data;
 	let eventSource;
 
+	function update(announcements, updates) {
+		const a = [...announcements];
+
+		for (const update of updates) {
+			const i = data.announcements.findIndex(sameId(update));
+			if (i >= 0) a[i] = update;
+		}
+
+		return a;
+
+		function sameId(a1) {
+			return (a2) => a1.AdvertisedTrainIdent === a2.AdvertisedTrainIdent;
+		}
+	}
+
 	onMount(() => {
+		if (!data?.sseUrl) return;
+
 		eventSource = new EventSource(data.sseUrl);
 		eventSource.onmessage = ({ data: s }) => {
 			const { RESPONSE } = JSON.parse(s);
 			const [{ TrainAnnouncement }] = RESPONSE.RESULT;
-			const updated = data.announcements;
-			for (let i = 0; i < TrainAnnouncement.length; i++) {
-				const found = data.announcements.findIndex(
-					({ AdvertisedTrainIdent }) =>
-						AdvertisedTrainIdent === TrainAnnouncement[i].AdvertisedTrainIdent
-				);
-				if (found >= 0) updated[found] = TrainAnnouncement[i];
-			}
-			data.announcements = updated;
+			data.announcements = update(data.announcements, TrainAnnouncement);
 		};
 	});
 

@@ -18,7 +18,7 @@ export const load = async ({ params }) => {
 	return {
 		location,
 		announcements: announcements.TrainAnnouncement,
-		sseUrl: announcements.INFO.SSEURL
+		sseUrl: announcements.INFO?.SSEURL
 	};
 };
 

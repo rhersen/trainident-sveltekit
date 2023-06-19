@@ -11,7 +11,7 @@
 
 		for (const update of updates) {
 			const i = data.announcements.findIndex(sameId(update));
-			if (i >= 0) a[i] = update;
+			if (i >= 0) a[i] = update; else a.push(update)
 		}
 
 		return a;

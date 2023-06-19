@@ -1,7 +1,7 @@
 <script>
 	import locations from '$lib/short.json';
 	import Row from './Row.svelte';
-	import {onDestroy, onMount} from "svelte";
+	import { onDestroy, onMount } from 'svelte';
 
 	export let data;
 	let eventSource;
@@ -10,14 +10,22 @@
 		const a = [...announcements];
 
 		for (const update of updates) {
+			console.log(update.ActivityType, update.LocationSignature);
 			const i = data.announcements.findIndex(sameId(update));
-			if (i >= 0) a[i] = update; else a.push(update)
+			if (i >= 0) a[i] = update;
+			else if (update.ActivityType === 'Avgang') {
+				a.push(update);
+				a.sort(({ AdvertisedTimeAtLocation: t1 }, { AdvertisedTimeAtLocation: t2 }) =>
+					t1 < t2 ? -1 : t1 > t2 ? 1 : 0
+				);
+			}
 		}
 
 		return a;
 
 		function sameId(a1) {
-			return (a2) => a1.LocationSignature === a2.LocationSignature;
+			return (a2) =>
+				a1.LocationSignature === a2.LocationSignature && a1.ActivityType === a2.ActivityType;
 		}
 	}
 

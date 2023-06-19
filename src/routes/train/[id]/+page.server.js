@@ -24,24 +24,28 @@ export const load = async ({ params }) => {
 		ProductInformation: found?.ProductInformation,
 		ToLocation: found?.ToLocation,
 		ViaToLocation: found?.ViaToLocation,
-		announcements: announcements(RESPONSE)
+		announcements: announcements(RESPONSE),
+		sseUrl: RESPONSE.RESULT[0].INFO?.SSEURL
 	};
 };
 
 function getBody({ id }) {
+	const now = Date.now();
+	const since = new Date(now - 12 * 60 * 6e4).toISOString();
+	const until = new Date(now + 12 * 60 * 6e4).toISOString();
 	return `
 <REQUEST>
   <LOGIN authenticationkey='${process.env.TRAFIKVERKET_API_KEY}' />
-     <QUERY objecttype='TrainAnnouncement' orderby='AdvertisedTimeAtLocation' schemaversion='1.6'>
+     <QUERY objecttype='TrainAnnouncement' orderby='AdvertisedTimeAtLocation' sseurl='true' schemaversion='1.6'>
       <FILTER>
          <AND>
             <NE name='Canceled' value='true' />
         		<EQ name='AdvertisedTrainIdent' value='${id}' />
             <OR>
-               <GT name='AdvertisedTimeAtLocation' value='$dateadd(-12:00:00)' />
-               <GT name='EstimatedTimeAtLocation' value='$dateadd(-12:00:00)' />
+               <GT name='AdvertisedTimeAtLocation' value='${since}' />
+               <GT name='EstimatedTimeAtLocation' value='${since}' />
             </OR>
-            <LT name='AdvertisedTimeAtLocation' value='$dateadd(12:00:00)' />
+            <LT name='AdvertisedTimeAtLocation' value='${until}' />
          </AND>
       </FILTER>
       <INCLUDE>ActivityType</INCLUDE>

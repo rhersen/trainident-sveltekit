@@ -2,7 +2,7 @@
 	import locations from '$lib/short.json';
 	import Row from './Row.svelte';
 	import { onDestroy, onMount } from 'svelte';
-	import { announcementFilter } from '$lib/announcements.js';
+	import announcementFilter from '$lib/announcements.js';
 
 	export let data;
 	let eventSource;

@@ -24,7 +24,7 @@ export const load = async ({ params }) => {
 		ProductInformation: found?.ProductInformation,
 		ToLocation: found?.ToLocation,
 		ViaToLocation: found?.ViaToLocation,
-		announcements: announcements(RESPONSE),
+		announcements: RESPONSE.RESULT[0].TrainAnnouncement.filter(announcements),
 		sseUrl: RESPONSE.RESULT[0].INFO?.SSEURL
 	};
 };

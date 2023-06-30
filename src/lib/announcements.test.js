@@ -36,12 +36,7 @@ describe('announcements', () => {
 			}
 		];
 
-		expect(announcements({ RESULT: [{ TrainAnnouncement: sj }] })).toEqual([
-			sj[0],
-			sj[2],
-			sj[4],
-			sj[5]
-		]);
+		expect(sj.filter(announcements)).toEqual([sj[0], sj[2], sj[4], sj[5]]);
 	});
 
 	it('shows Ankomst if there is no Avgang', () => {
@@ -216,7 +211,7 @@ describe('announcements', () => {
 			}
 		];
 
-		expect(announcements({ RESULT: [{ TrainAnnouncement: sl }] })).toEqual([
+		expect(sl.filter(announcements)).toEqual([
 			sl[0],
 			sl[2],
 			sl[4],

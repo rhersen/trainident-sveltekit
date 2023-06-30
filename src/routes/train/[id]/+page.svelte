@@ -2,30 +2,23 @@
 	import locations from '$lib/short.json';
 	import Row from './Row.svelte';
 	import { onDestroy, onMount } from 'svelte';
+	import { announcementFilter } from '$lib/announcements.js';
 
 	export let data;
 	let eventSource;
 
 	function update(announcements, updates) {
-		const a = [...announcements];
+		return [...announcements.filter(notUpdated), ...updates]
+			.filter(announcementFilter)
+			.sort(({ AdvertisedTimeAtLocation: t1 }, { AdvertisedTimeAtLocation: t2 }) =>
+				t1 < t2 ? -1 : t1 > t2 ? 1 : 0
+			);
 
-		for (const update of updates) {
-			console.log(update.ActivityType, update.LocationSignature);
-			const i = data.announcements.findIndex(sameId(update));
-			if (i >= 0) a[i] = update;
-			else if (update.ActivityType === 'Avgang') {
-				a.push(update);
-				a.sort(({ AdvertisedTimeAtLocation: t1 }, { AdvertisedTimeAtLocation: t2 }) =>
-					t1 < t2 ? -1 : t1 > t2 ? 1 : 0
-				);
-			}
-		}
-
-		return a;
-
-		function sameId(a1) {
-			return (a2) =>
-				a1.LocationSignature === a2.LocationSignature && a1.ActivityType === a2.ActivityType;
+		function notUpdated({ ActivityType, LocationSignature }) {
+			return !updates.some(
+				(update) =>
+					update.LocationSignature === LocationSignature && update.ActivityType === ActivityType
+			);
 		}
 	}
 

@@ -1,26 +1,11 @@
 <script>
-	import { differenceInSeconds, parseISO } from 'date-fns';
-	import hue from '$lib/hue.js';
+	import formatDelay from '$lib/formatDelay.js';
 
 	export let announcement;
-
-	const delay =
-		announcement?.TimeAtLocationWithSeconds &&
-		differenceInSeconds(
-			parseISO(announcement.TimeAtLocationWithSeconds),
-			parseISO(announcement.AdvertisedTimeAtLocation)
-		);
-
-	const h = hue(delay);
 </script>
 
-<td style={h && `background-color: hsl(${h}deg, 100%, 70%)`}>
-	{announcement.TimeAtLocationWithSeconds
-		? differenceInSeconds(
-				parseISO(announcement.TimeAtLocationWithSeconds),
-				parseISO(announcement.AdvertisedTimeAtLocation)
-		  ).toString()
-		: ''}
+<td>
+	{formatDelay(announcement)}
 </td>
 
 <style>

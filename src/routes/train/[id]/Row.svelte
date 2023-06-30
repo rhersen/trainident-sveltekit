@@ -12,14 +12,13 @@
 
 	export let announcement;
 
-	const delay =
+	$: h = hue(
 		announcement?.TimeAtLocationWithSeconds &&
-		differenceInSeconds(
-			parseISO(announcement.TimeAtLocationWithSeconds),
-			parseISO(announcement.AdvertisedTimeAtLocation)
-		);
-
-	const h = hue(delay);
+			differenceInSeconds(
+				parseISO(announcement.TimeAtLocationWithSeconds),
+				parseISO(announcement.AdvertisedTimeAtLocation)
+			)
+	);
 </script>
 
 <tr style={h && `background-color: hsl(${h}deg, 100%, 70%)`}>

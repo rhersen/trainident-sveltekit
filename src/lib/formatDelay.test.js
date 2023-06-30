@@ -9,7 +9,13 @@ describe('formatDelay', () => {
 	it('works', () => {
 		expect(formatDelay(a('05'))).toBe('0');
 		expect(formatDelay(a('07'))).toBe('⅒');
-		expect(formatDelay(a('32'))).toBe('½');
+		expect(formatDelay(a('11'))).toBe('⅙');
+		expect(formatDelay(a('13'))).toBe('⅕');
+		expect(formatDelay(a('19'))).toBe('⅕');
+		expect(formatDelay(a('21'))).toBe('⅓');
+		expect(formatDelay(a('31'))).toBe('½');
+		expect(formatDelay(a('39'))).toBe('⅗');
+		expect(formatDelay(a('41'))).toBe('⅔');
 	});
 });
 

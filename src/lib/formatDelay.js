@@ -8,8 +8,18 @@ export default (announcement) => {
 		parseISO(announcement.AdvertisedTimeAtLocation)
 	);
 
-	if (number < 6) return '0';
-	if (number < 30) return '⅒';
-	if (number < 60) return '½';
-	return number;
+	if (number >= 60) return `${Math.round(number / 60)}min`;
+
+	if (number >= 50) return '⅚';
+	if (number >= 48) return '⅘';
+	if (number >= 40) return '⅔';
+	if (number >= 36) return '⅗';
+	if (number >= 30) return '½';
+	if (number >= 24) return '⅖';
+	if (number >= 20) return '⅓';
+	if (number >= 12) return '⅕';
+	if (number >= 10) return '⅙';
+	if (number >= 6) return '⅒';
+
+	return '0';
 };

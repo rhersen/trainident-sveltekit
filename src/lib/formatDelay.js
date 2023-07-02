@@ -19,7 +19,6 @@ export default (announcement) => {
 	if (number >= 20) return '⅓';
 	if (number >= 12) return '⅕';
 	if (number >= 10) return '⅙';
-	if (number >= 6) return '⅒';
 
 	return '0';
 };

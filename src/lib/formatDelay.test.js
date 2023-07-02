@@ -8,7 +8,7 @@ describe('formatDelay', () => {
 
 	it('works', () => {
 		expect(formatDelay(a('05'))).toBe('0');
-		expect(formatDelay(a('07'))).toBe('⅒');
+		expect(formatDelay(a('07'))).toBe('0');
 		expect(formatDelay(a('11'))).toBe('⅙');
 		expect(formatDelay(a('13'))).toBe('⅕');
 		expect(formatDelay(a('19'))).toBe('⅕');

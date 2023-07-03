@@ -16,6 +16,12 @@ describe('formatDelay', () => {
 		expect(formatDelay(a('31'))).toBe('½');
 		expect(formatDelay(a('39'))).toBe('⅗');
 		expect(formatDelay(a('41'))).toBe('⅔');
+		expect(
+			formatDelay({
+				AdvertisedTimeAtLocation: '2023-06-30T08:21:00.000+02:00',
+				TimeAtLocationWithSeconds: `2023-06-30T08:22:05.000+02:00`
+			})
+		).toBe('1m');
 	});
 });
 

@@ -7,27 +7,22 @@ describe('formatDelay', () => {
 	});
 
 	it('works', () => {
-		expect(formatDelay(a('05'))).toBe('0');
-		expect(formatDelay(a('07'))).toBe('0');
-		expect(formatDelay(a('11'))).toBe('⅙');
-		expect(formatDelay(a('13'))).toBe('⅕');
-		expect(formatDelay(a('19'))).toBe('⅕');
-		expect(formatDelay(a('21'))).toBe('⅓');
-		expect(formatDelay(a('31'))).toBe('½');
-		expect(formatDelay(a('39'))).toBe('⅗');
-		expect(formatDelay(a('41'))).toBe('⅔');
-		expect(
-			formatDelay({
-				AdvertisedTimeAtLocation: '2023-06-30T08:21:00.000+02:00',
-				TimeAtLocationWithSeconds: `2023-06-30T08:22:05.000+02:00`
-			})
-		).toBe('1m');
+		expect(formatDelay(a('08:21', '08:21:05'))).toBe('0');
+		expect(formatDelay(a('08:21', '08:21:07'))).toBe('0');
+		expect(formatDelay(a('08:21', '08:21:11'))).toBe('⅙');
+		expect(formatDelay(a('08:21', '08:21:13'))).toBe('⅕');
+		expect(formatDelay(a('08:21', '08:21:19'))).toBe('⅕');
+		expect(formatDelay(a('08:21', '08:21:21'))).toBe('⅓');
+		expect(formatDelay(a('08:21', '08:21:31'))).toBe('½');
+		expect(formatDelay(a('08:21', '08:21:39'))).toBe('⅗');
+		expect(formatDelay(a('08:21', '08:21:41'))).toBe('⅔');
+		expect(formatDelay(a('08:21', '08:22:05'))).toBe('1m');
 	});
 });
 
-function a(s) {
+function a(advertised, time) {
 	return {
-		AdvertisedTimeAtLocation: '2023-06-30T08:21:00.000+02:00',
-		TimeAtLocationWithSeconds: `2023-06-30T08:21:${s}.000+02:00`
+		AdvertisedTimeAtLocation: `2023-06-30T${advertised}:00.000+02:00`,
+		TimeAtLocationWithSeconds: `2023-06-30T${time}.000+02:00`
 	};
 }
